@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Entrega</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #5F2500;
+            color: #fff;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .search-form {
+            margin-bottom: 20px;
+        }
+
+        .search-form label {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        .search-form input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-form input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #5F2500;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-form input[type="submit"]:hover {
+            background-color: #4A1D00;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .order-info thead th,
+        .items thead th {
+            background-color: #5F2500;
+        }
+
+        .footer {
+            background-color: #5F2500;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .edit-button {
+            background-color: #FFA500;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .edit-button:hover {
+            background-color: #FF8C00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Controle de Entrega de Pedidos</h1>
+    </header>
+
+    <div class="container">
+        <form class="search-form" id="searchForm">
+            <label for="orderId">Número do Pedido:</label>
+            <input type="text" id="orderId" name="orderId" placeholder="Digite o número do pedido" required>
+            <input type="submit" value="Buscar Status">
+        </form>
+
+        <table id="orderInfoTable" class="order-info">
+            <thead>
+                <tr>
+                    <th colspan="5">Informações do Pedido</th>
+                </tr>
+                <tr>
+                    <th>Número do Pedido</th>
+                    <th>Nome do Cliente</th>
+                    <th>Data do Pedido</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados do pedido serão preenchidos via JavaScript -->
+            </tbody>
+        </table>
+
+        <table id="itemsTable" class="items">
+            <thead>
+                <tr>
+                    <th colspan="5">Itens do Pedido</th>
+                </tr>
+                <tr>
+                    <th>Item</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Itens do pedido serão preenchidos via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Clementino Padaria Artesanal - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var orderId = document.getElementById('orderId').value;
+            fetchOrderDetails(orderId);
+        });
+
+        function fetchOrderDetails(orderId) {
+            // Corrigido o erro na interpolação da URL
+            fetch(`http://localhost:3001/pedidos/${orderId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var orderInfoTableBody = document.getElementById('orderInfoTable').getElementsByTagName('tbody')[0];
+                    var itemsTableBody = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
+                   
+                    orderInfoTableBody.innerHTML = ''; // Limpa o conteúdo existente
+                    itemsTableBody.innerHTML = ''; // Limpa o conteúdo existente
+
+                    if (data.error) {
+                        var orderRow = orderInfoTableBody.insertRow();
+                        orderRow.insertCell(0).colSpan = 5;
+                        orderRow.cells[0].textContent = data.error;
+                        orderRow.cells[0].style.textAlign = 'center';
+                    } else {
+                        // Preencher informações do pedido
+                        var order = data.order;
+                        var orderRow = orderInfoTableBody.insertRow();
+                        orderRow.insertCell(0).textContent = order.id_pedido;
+                        orderRow.insertCell(1).textContent = order.nomeCliente;
+                        orderRow.insertCell(2).textContent = order.data_pedido;
+                        orderRow.insertCell(3).textContent = order.status;
+
+                        // Preencher itens do pedido
+                        data.items.forEach(function(item) {
+                            var itemRow = itemsTableBody.insertRow();
+                            itemRow.insertCell(0).textContent = item.item;
+                            itemRow.insertCell(1).textContent = item.descrição;
+                            itemRow.insertCell(2).textContent = item.quantidade;
+                            itemRow.insertCell(3).textContent = `R$ ${item.preço.toFixed(2)}`;
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        }
+    </script>
+</body>
+</html>

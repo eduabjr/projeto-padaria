@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Carrinho de compras</title>
+</head>
+
+<body>
+  <main class="conteudo-principal">
+    <div class="grafismo-vermelho"></div>
+    <section class="adicionar-produto">
+      <h1 class="titulo">
+        Carrinho de <span class="texto-vermelho">compras</span>
+      </h1>
+
+      <form class="formulario">
+        <label class="campo-grupo">
+          <span class="texto-medio-vermelho">Produto</span>
+          <select class="produto-input" name="produto" id="produto">
+            <option value="Pao Francês - R$2">Pao Francês- R$2</option>
+            <option value="Torta de frango - R$15">Torta de Frango - R$15</option>
+            <option value="pao_integral - R$3">Pão Integral - R$3</option>
+            <option value="broa - R$2">Broa de Milho - R$2</option>
+            <option value="bolo_chocolate - R$12">Bolo de Chocolate - R$12</option>
+            <option value="suco_laranja - R$4">Suco de Laranja (500ml) - R$4</option>
+            <option value="cafe_expresso - R$3">Café Expresso - R$3</option>
+            <option value="salgado_assado - R$3">Salgado Assado (unidade) - R$3</option>
+            
+          </select>
+          </div>
+        </label>
+
+        <section class="parte-inferior">
+          <label class="campo-grupo">
+            <span class="texto-medio-vermelho">Qtde.</span>
+            <input class="quantidade-input" id="quantidade" type="number" placeholder="100">
+          </label>
+
+          <section class="botoes-wrapper">
+            <button onclick="adicionar()" type="button" class="botao-form botao-adicionar">Adicionar</button>
+            <button onclick="limpar()" type="button" class="botao-form botao-limpar">Limpar</button>
+          </section>
+        </section>
+      </form>
+    </section>
+    <section class="carrinho">
+      <img src="./assets/carrinho-cinza.svg" alt="Imagem de um carrinho de compras cinza">
+
+      <div class="titulo-wrapper">
+        <img src="./assets/icone-carrinho-updated.svg" alt="ícone de carrinho">
+
+        <h2 class="carrinho__titulo">Produtos no carrinho</h2>
+      </div>
+      <section class="carrinho__produtos" id="lista-produtos">
+        <section class="carrinho__produtos__produto">
+          <span class="texto-vermelho">1x</span> Pao Francês <span class="texto-vermelho"> R$2</span>
+        </section>
+      </section>
+
+      <div class="divisoria"></div>
+
+      <p class="carrinho__total">
+        Total: <span class="texto-vermelho" id="valor-total"> R$2</span>
+      </p>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>

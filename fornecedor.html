@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Fornecedor</title>
+    <style>
+        body {
+            font-family:Arial, Helvetica, sans-serif;
+            background-color: #b22222;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #b22222;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+        }
+
+        .form-group button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background-color: #a52a2a;
+        }
+
+        .error-message {
+            display: none;
+            padding: 10px;
+            background-color: #fdd;
+            border: 1px solid #d9534f;
+            border-radius: 4px;
+            color: #d9534f;
+            font-size: 14px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-top: 5px;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        .message-error {
+            display: none;
+            padding: 10px;
+            background-color: #fdd;
+            border: 1px solid #d9534f;
+            border-radius: 4px;
+            color: #d9534f;
+            font-size: 14px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-top: 5px;
+        }
+
+        .message-error.visible {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Fornecedor</h1>
+        <form id="supplierForm">
+            <div class="form-group">
+                <label for="supplierID">ID do Fornecedor:</label>
+                <input type="text" id="supplierID" name="supplierID" placeholder="Digite o ID do fornecedor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="supplierName">Nome do Fornecedor:</label>
+                <input type="text" id="supplierName" name="supplierName" placeholder="Digite o nome do fornecedor" required>
+                <div id="idMessage" class="error-message">O ID deve conter apenas números em 5 dígitos.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="contactName">Nome do Contato:</label>
+                <input type="text" id="contactName" name="contactName" placeholder="Digite o nome do contato" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefone:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Digite o telefone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="Digite o e-email" required>
+                <div id="emailMessage" class="error-message">O E-mail deve conter o caractere '@'.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Endereço:</label>
+                <textarea id="address" name="address" placeholder="Digite o endereço completo"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="documentType">Tipo de Documento:</label>
+                <select id="documentType" name="documentType" required>
+                    <option value="">Selecione</option>
+                    <option value="cpf">CPF</option>
+                    <option value="cnpj">CNPJ</option>
+                </select>
+            </div>
+            
+            <div class="form-group hidden" id="cpfGroup">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" placeholder="Digite o CPF" maxlength="11">
+                <div id="cpfMessage" class="message-error">O CPF deve ter 11 dígitos</div>
+            </div>
+
+            <div class="form-group hidden" id="cnpjGroup">
+                <label for="cnpj">CNPJ:</label>
+                <input type="text" id="cnpj" name="cnpj" placeholder="Digite o CNPJ" maxlength="14">
+                <div id="cnpjMessage" class="message-error">O CPF deve ter 14 dígitos</div>
+            </div>
+
+            <div class="form-group">
+                <label for="stateRegistration">Inscrição Estadual:</label>
+                <input type="text" id="stateRegistration" name="stateRegistration" placeholder="Digite a inscrição estadual (se aplicável)">
+            </div>
+
+
+            <div id="boletoInfo" class="hidden form-group">
+                <label for="boletoEmail">E-mail para envio do Boleto:</label>
+                <input type="text" id="boletoEmail" name="boletoEmail" placeholder="Digite o e-mail para envio" required>
+            </div>
+
+            <div id="transferenciaInfo" class="hidden form-group">
+                <label for="bankAccount">Dados da Conta Bancária:</label>
+                <textarea id="bankAccount" name="bankAccount" placeholder="Digite os dados da conta bancária" required></textarea>
+            </div>
+
+            <div id="cartaoInfo" class="hidden form-group">
+                <label for="cardNumber">Número do Cartão:</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="Digite o número do cartão" maxlength="16" required>
+                <label for="cardExpiry">Data de Validade:</label>
+                <input type="month" id="cardExpiry" name="cardExpiry" required>
+                <label for="cardCVV">CVV:</label>
+                <input type="text" id="cardCVV" name="cardCVV" placeholder="Digite o CVV" maxlength="3" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deliveryMethod">Método de Entrega:</label>
+                <input type="text" id="deliveryMethod" name="deliveryMethod" placeholder="Digite o método de entrega" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registrationDate">Data de Registro:</label>
+                <input type="date" id="registrationDate" name="registrationDate" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Cadastrar Fornecedor</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, ''); //inserção apenas de números
+            if (this.value.length > 11) {
+                this.value = this.value.slice(0, 11); //Limite de dígitos
+            }
+        });
+
+        document.getElementById('supplierID').addEventListener('input', function() {
+            const idField = this;
+            const messageDiv = document.getElementById('idMessage');
+            const value = idField.value.replace(/\D/g, ''); //remove não-números
+
+            idField.value = value; //Atualiza o campo com números
+
+            if (value.length === 5) {
+                messageDiv.classList.remove('visible');
+            } else {
+                messageDiv.classList.add('visible');
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function() {
+            const emailField = this;
+            const messageDiv = document.getElementById('emailMessage');
+            //Verifica se o campo contém o '@'
+            if (emailField.value.includes('@')) {
+                messageDiv.style.display = 'none';
+            } else {
+                messageDiv.style.display = 'block';
+            }
+        });
+
+        document.getElementById('supplierForm').addEventListener('submit', function (event) {
+            const emailField = document.getElementById('email');
+            //Verifica se o campo contém '@' ao enviar o form
+            if (!emailField.value.includes('@')) {
+                alert('Por favor, insira um e-mail válido que contenha o caractere "@"');
+                event.preventDefault(); //Impede o envio do form.
+            }
+        });
+
+        function toggleDocumentFields() {
+            const cpfGroup = document.getElementById('cpfGroup');
+            const cnpjGroup = document.getElementById('cnpjGroup');
+            const documentType = document.getElementById('documentType').value;
+
+            if (documentType === 'cpf') {
+                cpfGroup.classList.remove('hidden');
+                cnpjGroup.classList.add('hidden');
+            } else if (documentType === 'cnpj') {
+                cnpjGroup.classList.remove('hidden');
+                cpfGroup.classList.add('hidden');
+            } else {
+                cpfGroup.classList.add('hidden');
+                cnpjGroup.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('documentType').addEventListener('change', toggleDocumentFields);
+
+        document.getElementById('cpf').addEventListener('input', function() {
+            const cpfField = this;
+            const messageDiv = document.getElementById('cpfMessage');
+            const value = cpfField.value.replace(/\D/g, '');
+
+            if (value.length > 11) {
+                cpfField.value = value.slice(0, 11);
+            } else {
+                cpfField.value = value;
+            }
+
+            if(value.length === 11) {
+                messageDiv.classList.remove('visible');
+            } else {
+                messageDiv.classList.add('visible');
+            }
+        });
+
+        document.getElementById('cnpj').addEventListener('input', function() {
+            const cnpjField = this;
+            const messageDiv = document.getElementById('cnpjMessage');
+            const value = cnpjField.value.replace(/\D/g, '');
+
+            if (value.length > 14) {
+                cnpjField.value = value.slice(0, 14);
+            } else {
+                cnpjField.value = value;
+            }
+
+            if(value.length === 14) {
+                messageDiv.classList.remove('visible');
+            } else {
+                messageDiv.classList.add('visible');
+            }
+        });
+
+        document.getElementById('supplierForm').addEventListener('submit', function(event) {
+            const documentType = document.getElementById('documentType').value;
+            const cpfField = document.getElementById('cpf').value;
+            const cnpjField = document.getElementById('cnpj').value;
+            const cpfValue = cpfField.value.replace(/\D/g, '');
+            const cnpjValue = cnpjField.value.replace(/\D/g, '');
+
+            if (documentType === 'cpf' && cpfValue.length !== 11) {
+                alert('Por favor, insira um CPF com 11 dígitos.');
+                event.preventDefault();
+            } else if (documentType === 'cnpj' && cnpjValue.length !== 14) {
+                alert('Por favor, insira um CNPJ com 14 dígitos.');
+                event.preventDefault();
+            }
+            
+        });
+
+        document.getElementById('supplierForm').addEventListener('submit', function(event) {
+            const registrationDate = document.getElementById('registrationDate').value;
+            const selectedDate = new Date(registrationDate);
+            const today = new Date();
+
+            //Remove a hora para a comparação correta
+            today.setHours(0, 0, 0, 0,);
+
+            if (selectedDate > today) {
+                alert('Por favor, selecione uma data que não esteja na frente da data de hoje.');
+                event.preventDefault(); //Impede o envio do formulário
+            }
+        });
+    </script>
+</body>
+</html>
