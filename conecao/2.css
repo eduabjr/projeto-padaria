@@ -1,0 +1,209 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+
+form label {
+    display: block;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #612502; /* Cor de fundo */
+    margin: 0;
+    padding: 0;
+}
+.form-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fdf5e6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+h1 {
+    text-align: center;
+    color: #b22222;
+}
+.photo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.photo-box {
+    width: 100px;
+    height: 140px;
+    border: 1px solid #b22222;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-right: 20px;
+}
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta a imagem para cobrir a área do contêiner */
+}
+.photo-buttons {
+    display: flex;
+    flex-direction: column;
+}
+.photo-buttons button {
+    margin-bottom: 10px;
+    background-color: #b22222;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.photo-buttons button:hover {
+    background-color: #a11d1d;
+}
+.section {
+    background-color: #949494; /* Cinza claro para o fundo */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.section h2 {
+    margin-top: 0;
+    color: #fff;
+}
+.form-group {
+    margin-bottom: 20px; /* Maior margem inferior para separar os grupos */
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px; /* Espaço entre o rótulo e o campo de entrada */
+    font-weight: bold;
+}
+.form-group input, .form-group select {
+    width: calc(100% - 20px); /* Ajusta a largura para caber dentro do container */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; /* Fundo das caixas de texto */
+    border-radius: 5px;
+}
+.form-group .inline-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaço entre os campos dentro de um grupo */
+}
+.form-group .inline-group > div {
+    flex: 1;
+}
+.submit-btn, .clear-btn {
+    background-color: #b22222;
+    color: #fff;
+    border: none;
+    padding: 10px 20px; /* Ajuste o padding para aumentar a largura e a altura */
+    border-radius: 5px; /* Mantém um leve arredondamento nos cantos */
+    cursor: pointer;
+    width: auto; /* Define a largura como automática para que se ajuste ao conteúdo */
+    height: 35px; /* Define uma altura fixa para os botões */
+    display: inline-block; /* Permite que o botão mantenha suas dimensões */
+    margin-right: 10px;
+    text-align: center; /* Centraliza o texto dentro do botão */
+    font-size: 16px; /* Tamanho da fonte do texto */
+}
+.submit-btn:hover, .clear-btn:hover {
+    background-color: #a11d1d;
+}
+.number-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+.number-box input {
+    width: 100px;
+    padding: 5px;
+}
+.number-box button {
+    margin-left: 10px;
+    background-color: #b22222;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.number-box button:hover {
+    background-color: #a11d1d;
+}
+#tabelaFuncionarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fdf5e6;
+    border-radius: 10px;
+}
+#tabelaFuncionarios th, #tabelaFuncionarios td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+#tabelaFuncionarios th {
+    background-color: #b22222;
+    color: #fff;
+}
+
+.form-buttons {
+display: flex; /* Usar flexbox para o contêiner principal */
+justify-content: space-between; /* Distribui o espaço entre os botões */
+margin-top: 20px; /* Adiciona um espaçamento superior se necessário */
+}
+
+.button-container {
+flex: 1; /* Para que cada botão ocupe o mesmo espaço */
+display: flex; /* Usar flexbox para o contêiner do botão */
+justify-content: flex-start; /* Alinha o botão à esquerda */
+}
+
+.button-container:last-child {
+justify-content: flex-end; /* Alinha o último botão à direita */
+}
