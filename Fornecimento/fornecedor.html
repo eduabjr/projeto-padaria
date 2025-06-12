@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Fornecedor</title>
+    <style>
+        body {
+            font-family:Arial, Helvetica, sans-serif;
+            background-color: #b22222;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #b22222;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+        }
+
+        .form-group button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background-color: #a52a2a;
+        }
+
+        .error-message {
+            display: none;
+            padding: 10px;
+            background-color: #fdd;
+            border: 1px solid #d9534f;
+            border-radius: 4px;
+            color: #d9534f;
+            font-size: 14px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-top: 5px;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #editButton {
+            display: none; /* Oculta o botão "Alterar" */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Fornecedor</h1>
+        <form id="supplierForm" action="fornecedor.php" method="POST">
+            <div class="form-group">
+                <label for="supplierID">ID do Fornecedor:</label>
+                <input type="text" id="supplierID" name="supplierID" placeholder="Digite o ID do fornecedor" required>
+                <div id="idMessage" class="error-message">O ID deve conter apenas números em 5 dígitos.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="supplierName">Nome do Fornecedor:</label>
+                <input type="text" id="supplierName" name="supplierName" placeholder="Digite o nome do fornecedor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefone:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Digite o telefone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="Digite o e-email" required>
+                <div id="emailMessage" class="error-message">O E-mail deve conter o caractere '@'.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Endereço:</label>
+                <textarea id="address" name="address" placeholder="Digite o endereço completo"></textarea>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Cadastrar</button>
+                <button type="button" id="clearButton">Limpar</button>
+                <button type="button" id="editButton">Alterar</button>
+            </div>
+        </form>
+
+        <table id="supplierTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Endereço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Fornecedores serão adicionados aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Adiciona os event listeners
+        const suppliers = []; // Array para armazenar os fornecedores
+        let editIndex = -1;
+
+
+        function addEventListeners() {
+            document.getElementById('supplierID').addEventListener('input', function() {
+                const idField = this;
+                const messageDiv = document.getElementById('idMessage');
+                const value = idField.value.replace(/\D/g, ''); // remove não-números
+
+                idField.value = value; // Atualiza o campo com números
+
+                if (value.length === 5) {
+                    messageDiv.classList.remove('visible');
+                } else {
+                    messageDiv.classList.add('visible');
+                }
+            });
+
+            document.getElementById('supplierName').addEventListener('input', function() {
+                const nameField = this;
+                const messageDiv = document.getElementById('nameMessage');
+
+                if (nameField.value.length > 30) {
+                    messageDiv.classList.add('visible');
+                } else {
+                    messageDiv.classList.remove('visible');
+                }
+
+                nameField.value = nameField.value
+                    .toLowerCase()
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+            });
+
+            document.getElementById('phone').addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, ''); // apenas números
+                if (this.value.length > 11) {
+                    this.value = this.value.slice(0, 11); // Limite de dígitos
+                }   
+            });
+
+            document.getElementById('email').addEventListener('input', function() {
+                const emailField = this;
+                const messageDiv = document.getElementById('emailMessage');
+                if (emailField.value.includes('@')) {
+                    messageDiv.style.display = 'none';
+                } else {
+                    messageDiv.style.display = 'block';
+                }
+            });
+            
+            const emailField = document.getElementById('email');
+            emailField.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); //impede o envio do formulário
+                    document.getElementById('address').focus(); //move para o próximo campo
+                }
+            }) ;
+
+            document.getElementById('address').addEventListener('input', function() {
+                const addressField = this;
+                const messageDiv = document.getElementById('addressMessage');
+
+                //Verifica se o campo está vazio ou tem menos de 100 caracteres
+                if (addressField.value.length < 20) {
+                    messageDiv.classList.add('visible');
+                } else {
+                    messageDiv.classList.remove('visible');
+                }
+            });
+            
+            document.getElementById('supplierForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impede o envio do formulário
+                if (validateForm()) {
+                    addOrUpdateSupplier();
+                }
+            });
+
+            document.getElementById('clearButton').addEventListener('click', function() {
+                if (suppliers.length > 0) {
+                    suppliers.pop(); // Remove o último fornecedor do array
+                    renderTable(); // Atualiza a tabela
+                } else {
+                    alert('Nenhum registro para excluir.'); // Mensagem se não houver registros
+                }
+            });
+
+        }
+
+        // Função de validação (Create)
+        function validateForm() {
+            const emailField = document.getElementById('email');
+            if (!emailField.value.includes('@')) {
+                alert('Por favor, insira um e-mail válido que contenha o caractere "@"');
+                return false; // Retorna falso se a validação falhar
+            }
+            return true; // Retorna verdadeiro se a validação passar
+        }
+
+
+        function addOrUpdateSupplier() {
+            const supplierID = document.getElementById('supplierID').value;
+
+            // Verifica se o ID já existe
+            if (suppliers.some(supplier => supplier.supplierID === supplierID && editIndex === -1)) {
+                alert('Este ID de fornecedor já existe.');
+                return;
+            }
+
+            const supplierName = document.getElementById('supplierName').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+
+            if (editIndex === -1) {
+                // Adiciona o fornecedor ao array
+                suppliers.push({ supplierID, supplierName, phone, email, address });
+            } else {
+                // Atualiza o fornecedor existente
+                suppliers[editIndex] = { supplierID, supplierName, phone, email, address };
+                editIndex = -1; // Reseta o índice após a edição
+            }
+            // Atualiza a tabela
+            renderTable();
+            // Limpa o formulário
+            document.getElementById('supplierForm').reset();
+        }
+
+        function renderTable() {
+            const tableBody = document.getElementById('supplierTable').querySelector('tbody');
+            tableBody.innerHTML = ''; // Limpa a tabela antes de renderizar
+
+            suppliers.forEach((supplier, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${supplier.supplierID}</td>
+                    <td>${supplier.supplierName}</td>
+                    <td>${supplier.phone}</td>
+                    <td>${supplier.email}</td>
+                    <td>${supplier.address}</td>
+                    <td>
+                        <button type="button" onclick="editSupplier(${index})">Alterar</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function editSupplier(index) {
+            const supplier = suppliers[index];
+            document.getElementById('supplierID').value = supplier.supplierID;
+            document.getElementById('supplierName').value = supplier.supplierName;
+            document.getElementById('phone').value = supplier.phone;
+            document.getElementById('email').value = supplier.email;
+            document.getElementById('address').value = supplier.address;
+
+            editIndex = index; // Atualiza o índice de edição
+        }
+
+        // Lógica do botão Alterar (Update)
+        document.getElementById('editButton').addEventListener('click', function() {
+            const fields = [
+                'supplierID',
+                'supplierName',
+                'phone',
+                'email',
+                'address'
+            ];
+
+            let currentFieldIndex = 0;
+
+            function focusNextField() {
+                if (currentFieldIndex < fields.length) {
+                    document.getElementById(fields[currentFieldIndex]).value = '';
+                    document.getElementById(fields[currentFieldIndex]).focus();
+                    currentFieldIndex++;
+                }
+            }
+
+            focusNextField();
+
+            document.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    focusNextField();
+                }
+            });
+        });
+
+        // Inicializa os event listeners
+        addEventListeners(); //Inicializar a função
+    </script>
+</body>
+</html>

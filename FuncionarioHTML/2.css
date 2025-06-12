@@ -1,0 +1,281 @@
+/* Define a fonte e o espaçamento padrão para o corpo da página */
+body {
+    font-family: Arial, sans-serif; /* Fonte Arial com fallback para sans-serif */
+    margin: 20px; /* Define uma margem ao redor do corpo */
+}
+
+/* Estilo para o título principal (h1) */
+h1 {
+    color: #333; /* Define a cor do texto para um tom de cinza */
+}
+
+/* Estilo para a tabela */
+table {
+    width: 100%; /* A tabela ocupa toda a largura disponível */
+    border-collapse: collapse; /* Remove o espaço entre as bordas das células */
+}
+
+/* Estilo para bordas das células e cabeçalhos da tabela */
+table, th, td {
+    border: 1px solid #ddd; /* Define uma borda cinza clara */
+}
+
+/* Define o padding e alinhamento do conteúdo das células da tabela */
+th, td {
+    padding: 10px; /* Espaçamento interno das células */
+    text-align: left; /* Alinhamento à esquerda */
+}
+
+/* Margem inferior para divs dentro do formulário */
+form div {
+    margin-bottom: 10px; /* Adiciona espaço entre divs do formulário */
+}
+
+/* Estilo para labels dentro do formulário */
+form label {
+    display: block; /* Cada label ocupa uma linha inteira */
+}
+
+/* Estilo para os campos de entrada do formulário */
+form input {
+    width: 100%; /* Campos de entrada ocupam 100% da largura do contêiner */
+    padding: 8px; /* Espaçamento interno nos campos de entrada */
+    margin: 5px 0; /* Espaçamento entre o campo de entrada e outros elementos */
+}
+
+/* Estilo para botões dentro do formulário */
+form button {
+    padding: 10px 20px; /* Define o espaçamento interno dos botões */
+    background-color: #4CAF50; /* Cor de fundo verde */
+    color: white; /* Cor do texto branca */
+    border: none; /* Remove borda padrão */
+    cursor: pointer; /* Mostra o cursor de mão ao passar sobre o botão */
+}
+
+/* Estilo para o efeito de hover dos botões do formulário */
+form button:hover {
+    background-color: #45a049; /* Escurece a cor de fundo ao passar o mouse */
+}
+
+/* Redefinições para o corpo da página */
+body {
+    font-family: Arial, sans-serif; /* Define fonte padrão Arial */
+    background-color: #612502; /* Define cor de fundo marrom */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove padding padrão */
+}
+
+/* Estilo para o contêiner principal do formulário */
+.form-container {
+    max-width: 900px; /* Define largura máxima do formulário */
+    margin: 20px auto; /* Centraliza o formulário horizontalmente */
+    padding: 20px; /* Adiciona espaço interno ao formulário */
+    background-color: #fdf5e6; /* Define cor de fundo clara */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+    position: relative; /* Define posição relativa para elementos internos */
+}
+
+/* Estilo para o título principal dentro do contêiner */
+h1 {
+    text-align: center; /* Centraliza o texto */
+    color: #b22222; /* Define cor do título como vermelho escuro */
+}
+
+/* Contêiner para imagens */
+.photo-container {
+    display: flex; /* Define flexbox para alinhamento dos itens */
+    align-items: center; /* Centraliza itens verticalmente */
+    margin-bottom: 20px; /* Espaço abaixo do contêiner */
+}
+
+/* Caixa para exibir a imagem */
+.photo-box {
+    width: 100px; /* Largura fixa */
+    height: 140px; /* Altura fixa */
+    border: 1px solid #b22222; /* Borda vermelha escura */
+    border-radius: 5px; /* Bordas arredondadas */
+    display: flex; /* Flexbox para centralizar a imagem */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    overflow: hidden; /* Esconde parte da imagem que ultrapassar a caixa */
+    margin-right: 20px; /* Espaço à direita da caixa */
+}
+
+/* Ajusta a imagem dentro da caixa */
+.photo-box img {
+    width: 100%; /* Ocupa 100% da largura da caixa */
+    height: 100%; /* Ocupa 100% da altura da caixa */
+    object-fit: cover; /* Ajusta a imagem para cobrir toda a caixa */
+}
+
+/* Contêiner para botões relacionados à imagem */
+.photo-buttons {
+    display: flex; /* Flexbox para layout vertical */
+    flex-direction: column; /* Organiza botões em coluna */
+}
+
+/* Estilo dos botões relacionados à imagem */
+.photo-buttons button {
+    margin-bottom: 10px; /* Espaço entre os botões */
+    background-color: #b22222; /* Cor de fundo vermelha escura */
+    color: #fff; /* Cor do texto branca */
+    border: none; /* Remove borda */
+    padding: 5px; /* Define o padding do botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Mostra cursor de mão ao passar sobre o botão */
+}
+
+/* Efeito de hover para botões de foto */
+.photo-buttons button:hover {
+    background-color: #a11d1d; /* Escurece a cor do botão ao passar o mouse */
+}
+
+/* Seção do formulário */
+.section {
+    background-color: #949494; /* Cor de fundo cinza claro */
+    padding: 20px; /* Define padding interno */
+    margin-bottom: 20px; /* Espaço abaixo da seção */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+/* Estilo para subtítulos dentro das seções */
+.section h2 {
+    margin-top: 0; /* Remove margem superior */
+    color: #fff; /* Define cor do texto como branco */
+}
+
+/* Grupo de formulários */
+.form-group {
+    margin-bottom: 20px; /* Espaçamento entre grupos */
+}
+
+/* Estilo para labels dentro do grupo de formulários */
+.form-group label {
+    display: block; /* Label ocupa uma linha inteira */
+    margin-bottom: 5px; /* Espaço entre label e campo de entrada */
+    font-weight: bold; /* Define o peso do texto como negrito */
+}
+
+/* Campos de entrada e seleção dentro do grupo de formulário */
+.form-group input, 
+.form-group select {
+    width: 100%; /* Ocupa 100% da largura da form-group */
+    padding: 10px; /* Espaço interno do campo */
+    margin-bottom: 10px; /* Espaço abaixo dos campos */
+    border: 1px solid #ddd; /* Define uma borda cinza clara */
+    border-radius: 5px; /* Bordas arredondadas */
+    box-sizing: border-box; /* Inclui o padding na largura total */
+}
+
+/* Grupo de campos em linha */
+.form-group .inline-group {
+    display: flex; /* Flexbox para organizar itens em linha */
+    flex-wrap: wrap; /* Quebra linha se ultrapassar o limite do contêiner */
+    gap: 15px; /* Espaço entre os campos */
+}
+
+/* Define a flexibilidade dos elementos internos */
+.form-group .inline-group > div {
+    flex: 1; /* Cada div ocupa o mesmo espaço */
+}
+
+/* Estilo para botões de envio e limpar */
+.submit-btn, .clear-btn {
+    background-color: #b22222; /* Cor de fundo vermelha escura */
+    color: #fff; /* Cor do texto branca */
+    border: none; /* Remove borda */
+    padding: 10px 20px; /* Define o padding do botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Mostra cursor de mão ao passar sobre o botão */
+    width: auto; /* Define largura automática */
+    height: 35px; /* Altura fixa para os botões */
+    display: inline-block; /* Mantém dimensões */
+    margin-right: 10px; /* Espaço à direita do botão */
+    text-align: center; /* Centraliza o texto no botão */
+    font-size: 16px; /* Define o tamanho da fonte */
+}
+
+/* Efeito de hover para os botões de envio e limpar */
+.submit-btn:hover, .clear-btn:hover {
+    background-color: #a11d1d; /* Escurece a cor do botão ao passar o mouse */
+}
+
+/* Contêiner para o código do funcionário */
+.number-box {
+    position: absolute; /* Posicionamento absoluto */
+    top: 20px; /* Distância do topo */
+    right: 20px; /* Distância da direita */
+    display: flex; /* Flexbox para organizar itens em linha */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+}
+
+/* Estilo para o campo de entrada na caixa de código */
+.number-box input {
+    width: 100px; /* Define a largura */
+    padding: 5px; /* Espaço interno */
+}
+
+/* Estilo para o botão na caixa de código */
+.number-box button {
+    margin-left: 10px; /* Espaço à esquerda do botão */
+    background-color: #b22222; /* Cor de fundo vermelha escura */
+    color: #fff; /* Cor do texto branca */
+    border: none; /* Remove borda */
+    padding: 5px; /* Define o padding do botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Mostra cursor de mão ao passar sobre o botão */
+}
+
+/* Efeito de hover para o botão da caixa de código */
+.number-box button:hover {
+    background-color: #a11d1d; /* Escurece o botão ao passar o mouse */
+}
+
+/* Estilo para a tabela de funcionários */
+#tabelaFuncionarios {
+    width: 100%; /* A tabela ocupa toda a largura disponível */
+    border-collapse: collapse; /* Remove o espaço entre as bordas das células */
+    margin-top: 20px; /* Espaço acima da tabela */
+    background-color: #fdf5e6; /* Cor de fundo clara */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+/* Estilo para células da tabela */
+#tabelaFuncionarios th, #tabelaFuncionarios td {
+    padding: 10px; /* Espaçamento interno das células */
+    text-align: center; /* Centraliza o texto */
+    border: 1px solid #ddd; /* Borda cinza clara */
+}
+
+/* Estilo para o cabeçalho da tabela */
+#tabelaFuncionarios th {
+    background-color: #b22222; /* Cor de fundo vermelha escura */
+    color: #fff; /* Cor do texto branca */
+}
+
+/* Contêiner de botões de formulário */
+.form-buttons {
+    display: flex; /* Flexbox para o contêiner principal */
+    justify-content: space-between; /* Distribui espaço entre os botões */
+    margin-top: 20px; /* Espaço superior */
+}
+
+/* Estilo para contêiner de botão */
+.button-container {
+    flex: 1; /* Cada botão ocupa o mesmo espaço */
+    display: flex; /* Flexbox para o contêiner */
+    justify-content: flex-start; /* Alinha o botão à esquerda */
+}
+
+/* Alinha o último botão à direita */
+.button-container:last-child {
+    justify-content: flex-end; /* Alinha à direita */
+}
+
+/* Ajusta o espaçamento superior do título h1 */
+h1 {
+    text-align: center; /* Centraliza o texto */
+    color: #b22222; /* Define a cor vermelha escura */
+    margin-top: 80px; /* Margem superior para descer o título */
+}
