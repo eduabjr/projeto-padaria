@@ -1,0 +1,39 @@
+================================================================================
+COMANDOS GIT PARA O PROJETO PADARIA
+Repositório: https://github.com/eduabjr/projeto-padaria
+================================================================================
+
+📥 PULL - Buscar alterações do GitHub:
+   git pull origin main
+
+📤 PUSH - Enviar alterações para o GitHub:
+   git push origin main
+
+🔄 PRIMEIRO PUSH (após primeiro commit):
+   git add .
+   git commit -m "Initial commit: projeto organizado"
+   git push -u origin main
+
+📊 VERIFICAR STATUS:
+   git status
+
+👀 VER ARQUIVOS MODIFICADOS:
+   git diff
+
+📝 ADICIONAR ARQUIVOS:
+   git add .                    (todos os arquivos)
+   git add arquivo.php          (arquivo específico)
+
+💾 FAZER COMMIT:
+   git commit -m "Descrição da mudança"
+
+🔗 VER REMOTE CONFIGURADO:
+   git remote -v
+
+🌿 VER BRANCH ATUAL:
+   git branch
+
+================================================================================
+DICA: Sempre faça git pull antes de git push para evitar conflitos!
+================================================================================
+

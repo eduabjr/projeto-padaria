@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padaria Intranet</title>
+    <style>
+        .switch-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: darkred;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1200;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .item {
+            width: 30%;
+            text-align: center;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .item h3 {
+            color: #b22222;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .item p {
+            font-style: italic;
+            color: #555;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6;
+            transition: margin-left 0.3s;
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: darkred;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #5F2500;
+            color: #fff;
+            transition: left 0.3s ease;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .side-menu a {
+            color: #5F2500;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            font-size: 1.2em;
+            background-color: #f1c196; 
+            margin-bottom: 10px; 
+            border-radius: 5px; 
+        }
+
+        .side-menu a:hover {
+            background-color: #e8b787; 
+            color: #5F2500;
+        }
+
+        body.menu-open {
+            margin-left: 250px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: url('../images/top-image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 200px;
+            padding: 0 20px;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35); 
+            z-index: 1; 
+        }
+
+        header h1 {
+            color: #fff;
+            font-size: 2.5em;
+            font-family: 'Pacifico', cursive;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            margin: 0;
+            letter-spacing: 3px;
+            z-index: 2;
+        }
+
+        .logo {
+            width: 100px; 
+            height: auto;
+            margin-right: 20px;
+            z-index: 2;
+        }
+
+        .intranet-content {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fff;
+        }
+
+        .intranet-content h2 {
+            font-size: 2em;
+            color: #b22222;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .intranet-content p {
+            font-size: 1.2em;
+            color: #836b00;
+            font-weight: bold;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .disabled {
+            background-color: #555;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-button" onclick="toggleMenu()">MENU</button>
+    <button class="switch-button" onclick="switchSite()">Trocar para Cliente</button>
+
+    <div class="side-menu" id="sideMenu">
+        <br><br>
+        <a href="Entrega 2.0.html"><b>Entrega 🚚</b></a>
+        <a id="fornecedorButton" class="disabled" href="login2.html"><b>Cadastro Fornecedor📕</b></a> 
+        <a id="registerButton" class="disabled" href="login2.html"><b>Cadastro Funcionario📓</b></a>
+    </div>
+
+    <header>
+        <img class="logo" src="../images/Logo.png" alt="Logo da Padaria">
+        <h1>Clementino Intranet</h1>
+    </header>
+
+    <section id="dashboard" class="intranet-content">
+        <h2>Bem-vindo à Intranet</h2>
+        <p>Aqui você encontra ferramentas para a gestão da padaria, como controle de estoque, relatórios de vendas, e mais.</p>
+    </section>
+
+    <section id="galeria" class="intranet-content">
+        <div class="container">
+            <div class="item">
+                <img src="../images/padaria_interna.jpg" alt="Interior da Padaria" />
+                <h3>Interior da Padaria</h3>
+                <p>Nosso espaço acolhedor e artesanal.</p>
+            </div>
+            <div class="item">
+                <img src="../images/estoque.jpg" alt="Gestão de Estoque" />
+                <h3>Gestão de Estoque</h3>
+                <p>Organização e qualidade dos nossos produtos.</p>
+            </div>
+            <div class="item">
+                <img src="../images/equipe.jpg" alt="Equipe da Padaria" />
+                <h3>Equipe</h3>
+                <p>Nosso time dedicado e apaixonado pelo que faz.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('sideMenu');
+            var body = document.body;
+            if (menu.classList.contains('open')) {
+                menu.classList.remove('open');
+                body.classList.remove('menu-open'); 
+            } else {
+                menu.classList.add('open');
+                body.classList.add('menu-open'); 
+            }
+        }
+
+        function checkLogin() {
+            var loggedIn = sessionStorage.getItem('loggedIn');
+            var registerButton = document.getElementById('registerButton');
+            var fornecedorButton = document.getElementById('fornecedorButton');
+            if (loggedIn === 'true') {
+                registerButton.classList.remove('disabled');
+                registerButton.href = 'FuncionarioHTML/index.html';
+                fornecedorButton.classList.remove('disabled');
+                fornecedorButton.href = 'Fornecimento/abc.html';
+            }
+        }
+
+        window.onload = checkLogin;
+
+        function switchSite() {
+            window.location.href = 'Site Padaria.html'; 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastramento de Produtos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <section class="adicionar-produto">
+    <h2>Cadastrar Produtos</h2>
+    <form id="productForm">
+      <div>
+        <label for="id">ID:</label>
+        <input type="number" id="id" name="id" placeholder="ID" required />
+      </div>
+      <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome" required />
+      </div>
+      <button type="submit">Cadastrar</button>
+      <button type="button" id="cancelBtn">Cancelar</button>
+    </form>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="productsTable"></tbody>
+    </table>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('productForm');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const productsTable = document.getElementById('productsTable');
+        
+        // Função para exibir os produtos
+        function loadProducts() {
+            fetch('get_products.php')
+                .then(response => response.text())
+                .then(data => {
+                    productsTable.innerHTML = data;
+                });
+        }
+    
+        // Carregar os produtos ao carregar a página
+        loadProducts();
+    
+        // Função para cadastrar um produto
+        function handleAddProduct(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+    
+            fetch('processar_form.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                loadProducts();
+                form.reset();
+            });
+        }
+    
+        // Função para atualizar um produto
+        function handleUpdateProduct(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+    
+            fetch('update_product.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(() => {
+                loadProducts();
+                form.reset();
+                form.removeEventListener('submit', handleUpdateProduct);
+                form.addEventListener('submit', handleAddProduct);
+            });
+        }
+    
+        // Configura o formulário para cadastro inicial
+        form.addEventListener('submit', handleAddProduct);
+    
+        // Cancelar o formulário
+        cancelBtn.addEventListener('click', function() {
+            form.reset();
+            form.removeEventListener('submit', handleUpdateProduct);
+            form.addEventListener('submit', handleAddProduct);
+        });
+    
+        // Funções de editar e excluir produtos
+        productsTable.addEventListener('click', function(event) {
+            const target = event.target;
+            if (target.classList.contains('deleteBtn')) {
+                const productId = target.getAttribute('data-id');
+                fetch(`delete_product.php?id=${productId}`, {
+                    method: 'GET'
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    loadProducts();
+                });
+            } else if (target.classList.contains('editBtn')) {
+                const productId = target.getAttribute('data-id');
+                fetch(`edit_product.php?id=${productId}`, {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(product => {
+                    document.getElementById('id').value = product.id;
+                    document.getElementById('nome').value = product.nome;
+    
+                    // Ajusta o formulário para atualizar em vez de cadastrar
+                    form.removeEventListener('submit', handleAddProduct);
+                    form.addEventListener('submit', handleUpdateProduct);
+                });
+            }
+        });
+    });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,34 @@
+# Dependências
+node_modules/
+vendor/
+
+# Arquivos de configuração local
+.env
+.env.local
+*.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Uploads (se necessário excluir)
+# uploads/
+
+# Arquivos de backup
+*.backup
+*.old
+
