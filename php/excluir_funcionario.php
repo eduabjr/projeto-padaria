@@ -1,5 +1,5 @@
 <?php
-include 'config/config2.php'; // Arquivo com a conexão ao banco de dados
+include '../config/config2.php'; // Arquivo com a conexão ao banco de dados
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id']; // Recebe o ID do funcionário a ser excluído

@@ -1,13 +1,8 @@
 <?php
-/**
- * Deletar Cliente
- * Arquivo consolidado para exclusão de clientes com segurança
- */
-include 'config/config.php'; // Conexão com o banco
+include '../config/config.php'; // Conexão com o banco
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Aceita tanto 'id' quanto 'cliente_id' para compatibilidade
-    $cliente_id = isset($_POST['cliente_id']) ? $_POST['cliente_id'] : (isset($_POST['id']) ? $_POST['id'] : null);
+    $cliente_id = $_POST['cliente_id'];
 
     // Verifica se o ID foi passado
     if (!empty($cliente_id)) {
@@ -17,14 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bind_param("i", $cliente_id); // "i" indica que é um inteiro
 
         if ($stmt->execute()) {
-            // Redireciona se veio de cadastro_cliente.php, senão mostra mensagem
-            if (isset($_POST['redirect'])) {
-                header("Location: " . $_POST['redirect']);
-                exit();
-            } else {
-                header("Location: cadastro_cliente.php?msg=deleted");
-                exit();
-            }
+            echo "Cliente excluído com sucesso!";
         } else {
             echo "Erro ao excluir cliente: " . $stmt->error;
         }
@@ -38,4 +26,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     echo "Método de requisição inválido.";
 }
-?>

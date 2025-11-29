@@ -1,5 +1,5 @@
 <?php
-include 'config/config.php';
+include '../config/config.php';
 
 // Verifica se o ID foi passado via GET
 if (isset($_GET['id'])) {

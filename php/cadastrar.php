@@ -1,5 +1,5 @@
 <?php
-include('config/conexao.php'); // Inclui o arquivo de conexão com o banco
+include('../config/conexao.php'); // Inclui o arquivo de conexão com o banco
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codigo = $_POST['codigo'];

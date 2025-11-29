@@ -1,11 +1,16 @@
 <?php
-// Conectar ao banco de dados usando configuração unificada
-require_once 'config/config_db.php';
-$conn = getMySQLiConnection(DB_FEEDBACK);
+// Conectar ao banco de dados
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "feedback";
+
+// Cria a conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verifica a conexão
-if (!$conn) {
-    die("Falha na conexão com o banco de dados");
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
 }
 
 // Receber dados do formulário

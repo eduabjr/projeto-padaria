@@ -237,9 +237,9 @@
 
     <div class="side-menu" id="sideMenu">
         <br><br>
-        <a href="FeedBack.html"><b>Feedback 💬</b></a>
+        <a href="../php/feedback.php"><b>Feedback 💬</b></a>
         <a href="Entrega 2.0.html"><b>Entrega 🚚</b></a> 
-        <a href="Produtos/index.html"><b>Carrinho de Compras 🛒</b></a> 
+        <a href="../Produtos/index.html"><b>Carrinho de Compras 🛒</b></a> 
         <a id="registerButton" class="disabled" href="login.html"><b>Cadastro Cliente 📝</b></a>
         
     </div>
@@ -309,7 +309,7 @@
             var registerButton = document.getElementById('registerButton');
             if (loggedIn === 'true') {
                 registerButton.classList.remove('disabled');
-                registerButton.href = '../cadastro_cliente.php';
+                registerButton.href = '../php/cadastro_cliente.php';
             }
         }
 

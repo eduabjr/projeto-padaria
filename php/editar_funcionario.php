@@ -1,5 +1,5 @@
 <?php
-include 'config/config2.php';
+include '../config/config2.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id']; // Recebe o ID do funcionário para editar

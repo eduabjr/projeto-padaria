@@ -204,7 +204,7 @@
 </thead>
 <tbody>
     <?php
-    include 'config/config.php';
+    include '../config/config.php';
 
     $sql = "SELECT * FROM clientes";
     $result = mysqli_query($conn, $sql);
@@ -230,9 +230,8 @@
                     <a href='editar.php?id={$row['id']}' class='edit-button'>
                         <button type='button'>Editar</button>
                     </a>
-                    <form style='display:inline;' method='POST' action='deletar_cliente.php'>
+                    <form style='display:inline;' method='POST' action='delete_cliente.php'>
                         <input type='hidden' name='id' value='{$row['id']}'>
-                        <input type='hidden' name='redirect' value='cadastro_cliente.php'>
                         <button type='submit'>Excluir</button>
                     </form>
                 </td>

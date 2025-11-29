@@ -717,7 +717,7 @@
                 </thead>
                 <tbody>
                 <?php
-    include 'config/config2.php'; // Arquivo com a conexão ao banco de dados
+    include '../config/config2.php'; // Arquivo com a conexão ao banco de dados
 
     // Consulta para pegar todos os funcionários cadastrados
     $sql = "SELECT * FROM funcionarios"; // A tabela 'funcionarios' deve estar no banco de dados

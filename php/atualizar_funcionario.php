@@ -1,5 +1,5 @@
 <?php
-include 'config/config2.php';
+include '../config/config2.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];

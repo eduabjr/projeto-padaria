@@ -1,5 +1,5 @@
 <?php
-include 'config/config.php';
+include '../config/config.php';
 
 // Consulta para pegar todos os clientes
 $sql = "SELECT id, nome, email FROM clientes";
